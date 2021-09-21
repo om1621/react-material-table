@@ -85,10 +85,12 @@ const UserTable = () => {
           cellEditable={{
             onCellEditApproved: (newValue, oldValue, rowData, columnDef) => {
               return new Promise((resolve, reject) => {
-                const newData = rowData;
-                newData[columnDef.field] = newValue;
-                updateUser(rowData.id, newData);
-                setTimeout(resolve, 1000);
+                setTimeout(() => {
+                  const newData = rowData;
+                  newData[columnDef.field] = newValue;
+                  updateUser(rowData.id, newData);
+                  resolve();
+                }, 1000);
               });
             },
           }}
