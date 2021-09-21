@@ -96,7 +96,14 @@ const UserTable = () => {
                   const newData = rowData;
                   newData[columnDef.field] = newValue;
                   setUpdaing(true);
-                  setUserTableData([...userTableData, newData]);
+                  const updatedUserList = userTableData.map((user) => {
+                    if (user.id === rowData.id) {
+                      return newData;
+                    } else {
+                      return user;
+                    }
+                  });
+                  setUserTableData(updatedUserList);
                   await axios.put(
                     `https://jsonplaceholder.typicode.com/users/${rowData.id}`,
                     newData
